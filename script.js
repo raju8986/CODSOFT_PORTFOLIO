@@ -62,3 +62,37 @@ const typed =  new Typed('.multiple-text',{
     backDelay:1000,
     loop:true
 });
+// Email-JS
+const form = document.querySelector("form");
+const FullName = document.getElementById("FullName");
+const EmailId = document.getElementById("EmailId");
+const MoNo = document.getElementById("MoNo");
+const Subject = document.getElementById("Subject");
+const TextArea = document.getElementById("TextArea");
+function sendEmail(){
+    const bodyMessage = `Full Name: ${FullName.value}<br> Email: ${EmailId.value}<br> Phone Number: ${MoNo.value}<br> Message: ${TextArea.value}`;
+    Email.send({
+        Host : "smtp.elasticemail.com",
+        Username : "dsbdsoftware@gmail.com",
+        Password : "E694957E73DA57ADBA5514B84852EE5630BC",
+        To : 'dsbdsoftware@gmail.com',
+        From : "dsbdsoftware@gmail.com",
+        Subject : Subject.value,
+        Body : bodyMessage
+    }).then(
+      message => {
+        if (message == "OK") {
+            Swal.fire({
+                title: "Success!",
+                text: "Message Sent Successfully!",
+                icon: "success"
+              });
+        }
+      }
+    );
+}
+
+    form.addEventListener("submit", (e) =>  {
+        e.preventDefault();
+        sendEmail();
+});
